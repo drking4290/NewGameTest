@@ -53,7 +53,7 @@ public class Game extends Application
 		
 		
 		//create player object and set the sprite
-	    Actor player1 = new Actor();
+	    PlayerCharacter player1 = new PlayerCharacter();
 	    player1.setSprite("sprite.png");
 		
 	    //add canvas to stack
