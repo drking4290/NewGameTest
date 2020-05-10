@@ -1,4 +1,5 @@
 import javafx.application.Application;
+
 import javafx.stage.Stage;
 import javafx.stage.Screen;
 import javafx.scene.Parent;
@@ -6,13 +7,13 @@ import javafx.scene.Scene;
 import javafx.scene.Group;
 import javafx.scene.layout.StackPane;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
 import javafx.util.Duration;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
-import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
+
 
 import java.util.ArrayList;
 
@@ -44,7 +45,7 @@ public class Game extends Application
 		Scene primaryScene = new Scene(primaryStackPane);
 		
 		//graphics context object is used to draw on canvas
-		GraphicsContext gContext = primaryCanvas.getGraphicsContext2D();
+		//GraphicsContext gContext = primaryCanvas.getGraphicsContext2D();
 	
 		//set title, set scene
 		primaryStage.setTitle("Game Test");
@@ -62,6 +63,60 @@ public class Game extends Application
     	primaryStackPane.getChildren().addAll(player1.getSpriteImageView());
     	player1.getSpriteImageView().setVisible(false);
 	    
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+        ArrayList<String> input = new ArrayList<String>();
+        
+        primaryScene.setOnKeyPressed(
+            new EventHandler<KeyEvent>()
+            {
+                public void handle(KeyEvent e)
+                {
+                    String code = e.getCode().toString();
+ 
+                    // only add once... prevent duplicates
+                    if ( !input.contains(code) )
+                        input.add( code );
+                    System.out.println(input);
+                }
+            });
+ 
+        primaryScene.setOnKeyReleased(
+            new EventHandler<KeyEvent>()
+            {
+                public void handle(KeyEvent e)
+                {
+                    String code = e.getCode().toString();
+                    input.remove( code );
+                }
+            });
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
 		//setup game loop
         Timeline gameLoop = new Timeline();
         gameLoop.setCycleCount( Timeline.INDEFINITE );

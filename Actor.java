@@ -21,13 +21,13 @@ public class Actor
 	//constructor
 	public Actor() {}
 	
-	//calculates the new position based on the actor's velocity
+	//called every frame
 	public void update() 
 	{
 		this.render();
 	}
 	
-	//draws the associated image to the canvas using the position as coordinates
+	//draws the actor
 	
 	public void render() 
 	{
@@ -40,6 +40,9 @@ public class Actor
 		
     	
 		this.setSpriteViewport(this.positionX, this.positionY, (this.width / 4), (this.height / 4));
+		
+		//example of switching the sprite in view on the sheet
+		//this.setSpriteViewport((this.positionX + (this.width / 4)) , this.positionY, (this.width / 4), (this.height / 4));
 		
 		this.getSpriteImageView().setViewport(this.getSpriteViewport());
 		
