@@ -1,5 +1,5 @@
 import javafx.application.Application;
-
+import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
 import javafx.stage.Screen;
 import javafx.scene.Parent;
@@ -29,13 +29,13 @@ public class Game extends Application
 	
 	
 	
-	
-	
 	public static void main(String[] args) 
 	{
 		Application.launch(); 
 	}
 
+	
+	
 	@SuppressWarnings("restriction")
 	@Override
 	public void start(Stage primaryStage) throws Exception 
@@ -45,12 +45,11 @@ public class Game extends Application
 		Scene primaryScene = new Scene(primaryStackPane);
 		
 		//graphics context object is used to draw on canvas
-		//GraphicsContext gContext = primaryCanvas.getGraphicsContext2D();
+		GraphicsContext gContext = primaryCanvas.getGraphicsContext2D();
 	
 		//set title, set scene
 		primaryStage.setTitle("Game Test");
 		primaryStage.setScene(primaryScene);
-		
 		
 		//create player object and set the sprite
 	    PlayerCharacter player1 = new PlayerCharacter();
@@ -64,30 +63,22 @@ public class Game extends Application
     	player1.getSpriteImageView().setVisible(false);
 	    
     	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
+    	//this arraylist contains the keys that are currently being pressed
         ArrayList<String> input = new ArrayList<String>();
         
+        //listeners on primaryScene detect key presses
         primaryScene.setOnKeyPressed(
             new EventHandler<KeyEvent>()
             {
                 public void handle(KeyEvent e)
                 {
+                	//asci code is stored in string 
                     String code = e.getCode().toString();
  
-                    // only add once... prevent duplicates
+                    // check if code is already in arraylist
                     if ( !input.contains(code) )
                         input.add( code );
+                    //print contents of arraylist to console
                     System.out.println(input);
                 }
             });
@@ -98,48 +89,36 @@ public class Game extends Application
                 public void handle(KeyEvent e)
                 {
                     String code = e.getCode().toString();
+                    //when key is released remove the code from the arraylist
                     input.remove( code );
                 }
             });
     	
     	
     	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-		//setup game loop
+		//setup timeline/game loop
         Timeline gameLoop = new Timeline();
+        //timeline runs indefinetly
         gameLoop.setCycleCount( Timeline.INDEFINITE );
-        
+        //store the time when we started measuring the time, not currently used, but will be important later
         final long timeStart = System.currentTimeMillis();
         
+        //keyframe is an animation fram in a timeline, we are using it to set our game to process in ticks at a speed of 60 fps
         KeyFrame kf = new KeyFrame(Duration.seconds(0.017), new EventHandler<ActionEvent>()
             {
                
-        	
-        	
         		//game loop happens here at 60fps
+        		//everything that we want to happen during a single frame needs to go here
         		public void handle(ActionEvent ae)
                 {
 
                     //Clear the canvas
-                	//gContext.clearRect(0, 0, PRIMARY_CANVAS_WIDTH,PRIMARY_CANVAS_HEIGHT);
+                	gContext.clearRect(0, 0, PRIMARY_CANVAS_WIDTH,PRIMARY_CANVAS_HEIGHT);
                     
                 	//update playerobject
         			player1.update();
                 	
         		
-        			
                 	
                 }
             
@@ -150,10 +129,11 @@ public class Game extends Application
         
         
         
-        
+        //add keyframe to game loop
         gameLoop.getKeyFrames().add( kf );
+        //play the animation/loop
         gameLoop.play();
-		
+		//show the stage
 		primaryStage.show();
 		
 	}
