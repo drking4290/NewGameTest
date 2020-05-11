@@ -13,6 +13,8 @@ import javafx.util.Duration;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.image.ImageView;
+import javafx.scene.CacheHint;
 
 
 import java.util.ArrayList;
@@ -50,6 +52,7 @@ public class Game extends Application
 		Canvas primaryCanvas = new Canvas(PRIMARY_CANVAS_WIDTH, PRIMARY_CANVAS_HEIGHT);
 		Scene primaryScene = new Scene(primaryStackPane);
 		
+		
 		//graphics context object is used to draw on canvas
 		GraphicsContext gContext = primaryCanvas.getGraphicsContext2D();
 	
@@ -62,9 +65,12 @@ public class Game extends Application
 		
 	    //add canvas to stack
 	    primaryStackPane.getChildren().addAll(primaryCanvas);
+	    
     	
 	    //add sprite imageview to stack, make it invisible
     	primaryStackPane.getChildren().addAll(player1.getSpriteImageView());
+    	player1.getSpriteImageView().setCache(true);
+    	player1.getSpriteImageView().setCacheHint(CacheHint.SPEED);
     	player1.getSpriteImageView().setVisible(false);
 	    
 
