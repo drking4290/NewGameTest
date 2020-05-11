@@ -9,6 +9,7 @@ public class PlayerCharacter extends Actor
 	public PlayerCharacter() 
 	{
 		super();
+		
 	}
 	
 }

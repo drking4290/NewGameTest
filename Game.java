@@ -27,7 +27,9 @@ public class Game extends Application
 	private final int PRIMARY_CANVAS_WIDTH = 800;
 	private final int PRIMARY_CANVAS_HEIGHT = 600;
 	
-	
+	//this arraylist contains the keys that are currently being pressed
+    private static ArrayList<String> input = new ArrayList<String>();
+    
 	
 	public static void main(String[] args) 
 	{
@@ -35,6 +37,10 @@ public class Game extends Application
 	}
 
 	
+	public static ArrayList<String> getInput()
+	{
+		return input;
+	}
 	
 	@SuppressWarnings("restriction")
 	@Override
@@ -51,9 +57,8 @@ public class Game extends Application
 		primaryStage.setTitle("Game Test");
 		primaryStage.setScene(primaryScene);
 		
-		//create player object and set the sprite
-	    PlayerCharacter player1 = new PlayerCharacter();
-	    player1.setSprite("sprite.png");
+		//create player object 
+	    Actor player1 = new Actor();
 		
 	    //add canvas to stack
 	    primaryStackPane.getChildren().addAll(primaryCanvas);
@@ -62,10 +67,7 @@ public class Game extends Application
     	primaryStackPane.getChildren().addAll(player1.getSpriteImageView());
     	player1.getSpriteImageView().setVisible(false);
 	    
-    	
-    	//this arraylist contains the keys that are currently being pressed
-        ArrayList<String> input = new ArrayList<String>();
-        
+
         //listeners on primaryScene detect key presses
         primaryScene.setOnKeyPressed(
             new EventHandler<KeyEvent>()
@@ -79,7 +81,7 @@ public class Game extends Application
                     if ( !input.contains(code) )
                         input.add( code );
                     //print contents of arraylist to console
-                    System.out.println(input);
+                    //System.out.println(input);
                 }
             });
  
@@ -98,13 +100,15 @@ public class Game extends Application
     	
 		//setup timeline/game loop
         Timeline gameLoop = new Timeline();
+        
         //timeline runs indefinetly
         gameLoop.setCycleCount( Timeline.INDEFINITE );
+        
         //store the time when we started measuring the time, not currently used, but will be important later
         final long timeStart = System.currentTimeMillis();
         
         //keyframe is an animation fram in a timeline, we are using it to set our game to process in ticks at a speed of 60 fps
-        KeyFrame kf = new KeyFrame(Duration.seconds(0.017), new EventHandler<ActionEvent>()
+        KeyFrame kf = new KeyFrame(Duration.seconds(0.016), new EventHandler<ActionEvent>()
             {
                
         		//game loop happens here at 60fps
@@ -112,8 +116,7 @@ public class Game extends Application
         		public void handle(ActionEvent ae)
                 {
 
-                    //Clear the canvas
-                	gContext.clearRect(0, 0, PRIMARY_CANVAS_WIDTH,PRIMARY_CANVAS_HEIGHT);
+
                     
                 	//update playerobject
         			player1.update();
