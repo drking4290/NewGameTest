@@ -79,6 +79,8 @@ public class Game extends Application
     	player1.getSpriteImageView().setCacheHint(CacheHint.SPEED);
     	player1.getSpriteImageView().setVisible(false);
 	    
+    	background1.getBackgroundImageView().setCache(true);
+    	background1.getBackgroundImageView().setCacheHint(CacheHint.SPEED);
 
         //listeners on primaryScene detect key presses
         primaryScene.setOnKeyPressed(
