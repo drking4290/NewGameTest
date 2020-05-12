@@ -59,13 +59,19 @@ public class Game extends Application
 		//set title, set scene
 		primaryStage.setTitle("Game Test");
 		primaryStage.setScene(primaryScene);
+		primaryStage.setResizable(false);
 		
 		//create player object 
 	    Actor player1 = new Actor();
+		Background background1 = new Background();
+		
 		
 	    //add canvas to stack
 	    primaryStackPane.getChildren().addAll(primaryCanvas);
+	   
 	    
+	    //add background to stack
+		primaryStackPane.getChildren().addAll(background1.getBackgroundImageView());
     	
 	    //add sprite imageview to stack, make it invisible
     	primaryStackPane.getChildren().addAll(player1.getSpriteImageView());
@@ -122,7 +128,8 @@ public class Game extends Application
         		public void handle(ActionEvent ae)
                 {
 
-
+        			//update background
+        			background1.updateBackground();
                     
                 	//update playerobject
         			player1.update();
